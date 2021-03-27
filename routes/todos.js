@@ -3,7 +3,7 @@ const Todo = require('../models/Todo')
 const router = Router()
 
 router.get('/', async (req, res) => {
-  const todos = await Todo.find({})
+  const todos = await Todo.find({}).lean()
 
   res.render('index', {
     title: 'Todos list',
@@ -19,6 +19,7 @@ router.get('/create', (req, res) => {
   })
 })
 
+// Обрабатываем post-запросы на изменение данных в наших To-Do
 router.post('/create', async (req, res) => {
   const todo = new Todo({
     title: req.body.title

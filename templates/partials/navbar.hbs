@@ -1,0 +1,18 @@
+<header>
+  <nav class="red darken-1">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Ereburg</a>
+        <a data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li {{#if isIndex}}class="active"{{else}}{{/if}}><a href="/">Home</a></li>
+          <li {{#if isCreate}}class="active"{{else}}{{/if}}><a href="/create">Create</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <ul class="sidenav" id="mobile-demo">
+    <li {{#if isIndex}}class="active"{{else}}{{/if}}><a href="/">Home</a></li>
+    <li {{#if isCreate}}class="active"{{else}}{{/if}}><a href="/create">Create</a></li>
+  </ul>
+</header>

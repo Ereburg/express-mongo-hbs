@@ -1,37 +1,36 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path')
-const exphbs = require('express-handlebars')
+const expressHandlebars = require('express-handlebars')
 const todoRoutes = require('./routes/todos')
+const {db, port} = require('./config/config')
 
-const PORT = process.env.PORT || 3000
-
-const app = express()
-const hbs = exphbs.create({
+// Настраиваем приложение
+const app = express() // инициализируем фреймворк
+const hbs = expressHandlebars.create({
   defaultLayout: 'main',
   extname: 'hbs'
-})
+}) // настраиваем шаблонизатор
+const dbOptions = {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+}
 
-app.engine('hbs', hbs.engine)
-app.set('view engine', 'hbs')
-app.set('views', 'views')
+app.engine('hbs', hbs.engine) // регистрируем движок
+app.set('view engine', 'hbs') // устанавливаем движок по умолчанию
+app.set('views', 'templates') // папка, из которой будут браться шаблоны
 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({extended: true})) // парсим данные res.body
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(todoRoutes)
 
 async function start() {
   try {
-    await mongoose.connect(
-      'mongodb+srv://vladilen:1q2w3e4r@cluster0-ua4e7.mongodb.net/todos',
-      {
-        useNewUrlParser: true,
-        useFindAndModify: false
-      }
-    )
-    app.listen(PORT, () => {
-      console.log('Server has been started...')
+    await mongoose.connect(db, dbOptions)
+    app.listen(port || 3000, () => {
+      console.log('Сервер запущен...')
     })
   } catch (e) {
     console.log(e)

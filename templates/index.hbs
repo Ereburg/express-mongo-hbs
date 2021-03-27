@@ -1,4 +1,4 @@
-<h2>Todos page</h2>
+<h2>What I'm gonna to do? Hmm...</h2>
 
 {{#if todos.length}}
 <ul>
@@ -16,12 +16,12 @@
 
         <input type="hidden" value="{{_id}}" name="id">
 
-        <button class="btn btn-small" type="submit">Save</button>
+        <button class="btn btn-small red darken-1" type="submit">Save</button>
       </label>
     </form>
   </li>
   {{/each}}
 </ul>
 {{else}}
-<p>No todos!</p>
+<p>There is no todos!</p>
 {{/if}}
