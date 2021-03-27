@@ -21,6 +21,7 @@ app.engine('hbs', hbs.engine) // регистрируем движок
 app.set('view engine', 'hbs') // устанавливаем движок по умолчанию
 app.set('views', 'templates') // папка, из которой будут браться шаблоны
 
+// Middleware
 app.use(express.urlencoded({extended: true})) // парсим данные res.body
 app.use(express.static(path.join(__dirname, 'public')))
 

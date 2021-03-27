@@ -1,27 +1,20 @@
-<h2>What I'm gonna to do? Hmm...</h2>
+<h2>My plans</h2>
 
 {{#if todos.length}}
-<ul>
-  {{#each todos}}
-  <li class="todo">
-    <form action="/complete" method="POST">
-      <label>
-        {{#if completed}}
-        <input type="checkbox" checked name="completed">
-        <span class="completed">{{title}}</span>
-        {{else}}
-        <input type="checkbox" name="completed">
-        <span>{{title}}</span>
-        {{/if}}
-
-        <input type="hidden" value="{{_id}}" name="id">
-
-        <button class="btn btn-small red darken-1" type="submit">Save</button>
-      </label>
-    </form>
-  </li>
-  {{/each}}
-</ul>
+  <ul>
+    {{#each todos}}
+      <li class="todo">
+        <form action="/complete" method="POST">
+          <label>
+            <input type="checkbox" {{#if completed}}checked{{else}}{{/if}} name="completed">
+            <span {{#if completed}}class="completed"{{else}}{{/if}}>{{title}}</span>
+            <input type="hidden" value="{{_id}}" name="id">
+            <button class="btn btn-small red darken-1" type="submit">Save</button>
+          </label>
+        </form>
+      </li>
+    {{/each}}
+  </ul>
 {{else}}
-<p>There is no todos!</p>
+  <p>There is no todos!</p>
 {{/if}}
